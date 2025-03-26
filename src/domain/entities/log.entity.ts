@@ -4,7 +4,7 @@ export enum LogSeverityLevel {
     high = 'high'
 }
 
-export class Log {
+export class LogEntity {
     public level: LogSeverityLevel;
     public message: string;
     public date: Date;
