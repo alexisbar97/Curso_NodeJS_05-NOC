@@ -2,13 +2,17 @@ import { CronService } from "./cron/cron-service";
 import { CheckService } from "../domain/use-cases/checks/check-service";
 import { LogRepositoryImpl } from "../infrastructure/repositories/log.repository.impl";
 import { FileSystemDataSource } from "../infrastructure/datasources/file-system.datasource";
+import { envs } from "../config/plugins/envs.plugin";
 
 const fileSystemLogRepository = new LogRepositoryImpl(new FileSystemDataSource());
 
 export class Server {
     public static start() {
         console.log('Server started...');
-    
+        
+        // Send Email
+        // console.log(envs.MAILER_EMAIL, envs.MAILER_SECRET_KEY);
+
         // CronService.createJob(
         //     '*/5 * * * * *', 
         //     () => {
