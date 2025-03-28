@@ -3,6 +3,7 @@ import { CheckService } from "../domain/use-cases/checks/check-service";
 import { LogRepositoryImpl } from "../infrastructure/repositories/log.repository.impl";
 import { FileSystemDataSource } from "../infrastructure/datasources/file-system.datasource";
 import { envs } from "../config/plugins/envs.plugin";
+import { EmailService } from "./email/email.service";
 
 const fileSystemLogRepository = new LogRepositoryImpl(new FileSystemDataSource());
 
@@ -11,7 +12,14 @@ export class Server {
         console.log('Server started...');
         
         // Send Email
-        // console.log(envs.MAILER_EMAIL, envs.MAILER_SECRET_KEY);
+        const emailService = new EmailService();
+        emailService.sendEmail({
+            to: 'example.mail.development@gmail.com',
+            subject: 'Logs de Sistema',
+            htmlBody: `<h3>Logs de Sistema - NOC</h3>
+            <p>Por favor revisar los logs.</p>
+            `
+        });
 
         // CronService.createJob(
         //     '*/5 * * * * *', 
