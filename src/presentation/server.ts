@@ -12,10 +12,10 @@ export class Server {
         console.log('Server started...');
         
         // Send Email
-        const emailService = new EmailService();
-        emailService.sendEmailWithFileSystemLogs([
-            'example.mail.development@gmail.com',
-        ]);
+        // const emailService = new EmailService(fileSystemLogRepository);
+        // emailService.sendEmailWithFileSystemLogs([
+        //     'example.mail.development@gmail.com',
+        // ]);
 
         // CronService.createJob(
         //     '*/5 * * * * *', 
