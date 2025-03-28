@@ -23,7 +23,11 @@ export class CheckService implements CheckServiceUseCase{
                 throw new Error(`Error on check service ${url}`);
             }
 
-            const log = new LogEntity(`Service ${url} is working.`, LogSeverityLevel.high);
+            const log = new LogEntity({
+                message: `Service ${url} is working.`, 
+                level: LogSeverityLevel.high,
+                origin: 'check-service.ts'
+            });
 
             this.logRepository.saveLog(log);
             
@@ -36,7 +40,11 @@ export class CheckService implements CheckServiceUseCase{
             return true;
         } catch (error) {
             const errorMessage = `${error}`;
-            const log = new LogEntity(errorMessage, LogSeverityLevel.low);
+            const log = new LogEntity({
+                message: errorMessage, 
+                level: LogSeverityLevel.high, 
+                origin: 'check-service.ts'
+            }); 
             
             this.logRepository.saveLog(log);
 
