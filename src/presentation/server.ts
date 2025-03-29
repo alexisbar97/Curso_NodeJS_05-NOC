@@ -4,15 +4,24 @@ import { LogRepositoryImpl } from "../infrastructure/repositories/log.repository
 import { FileSystemDataSource } from "../infrastructure/datasources/file-system.datasource";
 import { envs } from "../config/plugins/envs.plugin";
 import { EmailService } from "./email/email.service";
+import { SendEmailLogs } from "../domain/use-cases/email/send-email-logs";
 
-const fileSystemLogRepository = new LogRepositoryImpl(new FileSystemDataSource());
+const fileSystemLogRepository = new LogRepositoryImpl(
+    new FileSystemDataSource()
+);
+
+const emailService = new EmailService();
 
 export class Server {
     public static start() {
         console.log('Server started...');
         
         // Send Email
-        // const emailService = new EmailService(fileSystemLogRepository);
+        new SendEmailLogs(
+            emailService,
+            fileSystemLogRepository
+        ).execute(['example.mail.development@gmail.com'])
+
         // emailService.sendEmailWithFileSystemLogs([
         //     'example.mail.development@gmail.com',
         // ]);

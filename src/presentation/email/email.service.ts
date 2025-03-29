@@ -24,9 +24,7 @@ export class EmailService {
         }
     });
 
-    constructor(
-        private readonly logRepository: LogRepository,
-    ) {}
+    constructor() {}
 
     async sendEmail(options: SendMailOptions): Promise<boolean>{
         const { to, subject, htmlBody, attachments = [] } = options;
@@ -39,27 +37,10 @@ export class EmailService {
                 attachments: attachments    // Equivalente a attachments: attachments
             });
 
-            
-            const log = new LogEntity({
-                level: LogSeverityLevel.low,
-                message: 'Email sent',
-                origin: 'email.service.ts'
-            });
-            
-            this.logRepository.saveLog(log);
-            
-            console.log(sentInformation);
+            // console.log(sentInformation);
             
             return true;
         } catch (error) {
-            const log = new LogEntity({
-                level: LogSeverityLevel.high,
-                message: "Email not sent",
-                origin: 'email.service.ts'
-            });
-            
-            this.logRepository.saveLog(log);
-            
             return false;
         }
     }
