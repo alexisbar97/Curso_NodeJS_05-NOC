@@ -5,3 +5,4 @@
 3. Ejecutar ```npm install``` para instalar dependencias y paquetes especificados en el archivo 'package.json'.
 4. Renombrar el archivo '.env.template' a '.env'.
 5. Configurar las variables de entorno.
+6. Ejecutar ```npm run dev```.
